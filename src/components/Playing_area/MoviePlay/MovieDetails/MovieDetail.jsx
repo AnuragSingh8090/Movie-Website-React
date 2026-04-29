@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   fetchApi,
   posterUrl,
@@ -19,11 +19,29 @@ const MovieDetail = ({ props }) => {
   const [videos, setVideos] = useState();
   const [images, setImages] = useState();
   const [casts, setCasts] = useState();
+  
+  // Ref to track iframe for proper cleanup
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     setImageKey(Date.now());
     hideTrailerPlay();
   }, [props]);
+
+  // Cleanup function to stop YouTube player
+  const stopYouTubePlayer = () => {
+    if (iframeRef.current) {
+      // Reset iframe src to stop the video
+      const currentSrc = iframeRef.current.src;
+      iframeRef.current.src = '';
+      // Small delay to ensure the video stops, then restore src for future use
+      setTimeout(() => {
+        if (iframeRef.current) {
+          iframeRef.current.src = currentSrc;
+        }
+      }, 100);
+    }
+  };
 
   const hideMoreDetails = () => {
     setShowDetails(false);
@@ -35,6 +53,7 @@ const MovieDetail = ({ props }) => {
   };
 
   const hideTrailerPlay = () => {
+    stopYouTubePlayer(); // Stop the video before hiding
     setShowPlay(false);
     setTrailer(null);
   };
@@ -43,6 +62,13 @@ const MovieDetail = ({ props }) => {
     setShowPlay(true);
     hideMoreDetails();
   };
+
+  // Cleanup on component unmount
+  useEffect(() => {
+    return () => {
+      stopYouTubePlayer();
+    };
+  }, []);
 
   useEffect(() => {
     if (showPlay) {
@@ -155,9 +181,10 @@ const MovieDetail = ({ props }) => {
             "Trailer not found !!"
           ) : (
             <iframe
+              ref={iframeRef}
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/${trailer.key}?rel=0&modestbranding=1`}
+              src={`https://www.youtube.com/embed/${trailer.key}?rel=0&modestbranding=1&enablejsapi=1`}
               title={trailer.name}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -291,7 +318,7 @@ const MovieDetail = ({ props }) => {
                     return (
                       <iframe
                         key={elem.key}
-                        src={`https://www.youtube.com/embed/${elem.key}?rel=0&modestbranding=1`}
+                        src={`https://www.youtube.com/embed/${elem.key}?rel=0&modestbranding=1&enablejsapi=1`}
                         title={elem.name}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

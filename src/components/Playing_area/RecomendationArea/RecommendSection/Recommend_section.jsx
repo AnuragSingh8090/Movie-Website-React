@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../../Card/Card";
 import ReactLoading from "react-loading";
+import SkeletonCard from "../../../Skeleton/SkeletonCard";
 import { options, posterUrl, checkMovieType } from "../../../../api/apiConfig";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
@@ -45,12 +46,11 @@ const Recommend_section = ({ title, url }) => {
       <h3>{title}</h3>
       <section className="scroll-container">
         {loading ? (
-          <ReactLoading
-            type={"spinningBubbles"}
-            color={"#9b59b6"}
-            height={80}
-            width={80}
-          />
+          <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', padding: '10px 0' }}>
+            {Array.from({ length: 6 }, (_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
         ) : error ? (
           <p>{error}</p>
         ) : movies.length > 0 ? (

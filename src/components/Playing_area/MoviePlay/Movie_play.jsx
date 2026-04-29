@@ -3,6 +3,7 @@ import "./Movie_play.css";
 import ReactLoading from "react-loading";
 import MovieDetail from "./MovieDetails/MovieDetail";
 import SeriesDetail from "./SeriesDetails/SeriesDetail";
+import MovieDetailSkeleton from "../../Skeleton/MovieDetailSkeleton";
 import { options, baseUrl } from "../../../api/apiConfig";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 
@@ -93,12 +94,7 @@ function Movie_play() {
           )}
         </>
       ) : movieID && movieType ? (
-        <ReactLoading
-          type={"spinningBubbles"}
-          color={"#9b59b6"}
-          height={80}
-          width={80}
-        />
+        <MovieDetailSkeleton />
       ) : (
         <div>Error: Invalid movie ID or type</div>
       )}

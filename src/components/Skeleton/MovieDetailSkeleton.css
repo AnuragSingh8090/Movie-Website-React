@@ -1,0 +1,315 @@
+/* Movie Detail Skeleton Styles - Matching exact CSS from Movie_play.css */
+
+.skeleton-poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  z-index: 0;
+  overflow: hidden;
+}
+
+.skeleton-poster::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: skeleton-loading 1.5s infinite;
+}
+
+/* Match bigCard_wrapper exactly */
+.skeleton-big-card-wrapper {
+  width: 100%;
+  z-index: 1;
+  gap: 30px;
+  padding: 10px 50px;
+  border-radius: 16px;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  display: flex;
+}
+
+/* Override align-items from .flex class to match bigCard_wrapper behavior */
+.skeleton-big-card-wrapper.flex {
+  align-items: flex-start;
+}
+
+/* Match cDetails exactly */
+.skeleton-cdetails {
+  min-width: 30%;
+  min-height: 340px;
+  padding: 10px;
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: space-between;
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.712);
+  box-shadow: var(--card_shadow_dark);
+  overflow: hidden;
+}
+
+/* Match bigCard exactly */
+.skeleton-big-card {
+  height: 340px;
+  width: 225px;
+  border-radius: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: var(--card_shadow_dark);
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  position: relative;
+}
+
+.skeleton-big-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.skeleton-movie-name {
+  width: 60%;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.skeleton-genre {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+
+.skeleton-genre-item {
+  width: 80px;
+  height: 24px;
+  background: rgba(16, 138, 187, 0.3);
+  border-radius: 15px;
+}
+
+.skeleton-info-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+
+.skeleton-icon {
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.skeleton-text {
+  width: 120px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.skeleton-text-long {
+  width: 200px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.skeleton-story {
+  margin: 6px 0;
+  max-height: 93px;
+  overflow: hidden;
+}
+
+.skeleton-story-line {
+  width: 100%;
+  height: 12px;
+  background: rgba(209, 207, 207, 0.2);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.skeleton-story-line.short {
+  width: 70%;
+}
+
+.skeleton-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.skeleton-button {
+  height: 32px;
+  border-radius: 18px;
+}
+
+.skeleton-button.primary {
+  width: 120px;
+  background: rgba(220, 53, 69, 0.3);
+}
+
+.skeleton-button.secondary {
+  width: 140px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Responsive design matching Movie_play.css exactly */
+@media screen and (max-width: 900px) {
+  .skeleton-big-card {
+    height: 322px;
+    width: 215px;
+  }
+  .skeleton-cdetails {
+    min-height: 322px;
+    max-width: 60%;
+  }
+  .skeleton-movie-name {
+    height: 28px;
+  }
+  .skeleton-genre {
+    gap: 5px;
+  }
+  .skeleton-genre-item {
+    width: 70px;
+    height: 20px;
+  }
+  .skeleton-button {
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .skeleton-big-card {
+    height: 300px;
+    width: 200px;
+  }
+  .skeleton-cdetails {
+    min-height: 300px;
+    max-width: 80%;
+  }
+  .skeleton-movie-name {
+    height: 22px;
+  }
+  .skeleton-genre-item {
+    width: 60px;
+    height: 18px;
+  }
+  .skeleton-info-row {
+    margin-bottom: 4px;
+  }
+  .skeleton-text {
+    height: 12px;
+  }
+  .skeleton-buttons {
+    margin-top: 7px;
+  }
+  .skeleton-button {
+    height: 28px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .skeleton-big-card-wrapper {
+    gap: 20px;
+    padding: 10px 20px;
+    align-items: center;
+  }
+  .skeleton-big-card-wrapper.flex {
+    align-items: center; /* Allow center alignment on mobile */
+  }
+  .skeleton-big-card {
+    height: 285px;
+    width: 190px;
+  }
+  .skeleton-cdetails {
+    min-height: 285px;
+    max-width: 61%;
+    gap: 4px;
+  }
+  .skeleton-movie-name {
+    height: 21px;
+  }
+  .skeleton-genre-item {
+    width: 55px;
+    height: 18px;
+  }
+  .skeleton-text {
+    height: 12px;
+  }
+  .skeleton-story-line {
+    height: 12px;
+  }
+  .skeleton-button {
+    height: 28px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .skeleton-big-card-wrapper {
+    gap: 20px;
+    padding: 10px 20px;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  .skeleton-big-card-wrapper.flex {
+    align-items: center; /* Allow center alignment on small mobile */
+  }
+  .skeleton-big-card {
+    height: 57vw;
+    width: 38vw;
+  }
+  .skeleton-cdetails {
+    min-height: 285px;
+    max-width: 100%;
+    gap: 4px;
+  }
+  .skeleton-movie-name {
+    height: 21px;
+  }
+  .skeleton-genre-item {
+    width: 60px;
+    height: 20px;
+  }
+  .skeleton-text {
+    height: 14px;
+  }
+  .skeleton-story-line {
+    height: 12px;
+  }
+  .skeleton-button {
+    height: 32px;
+  }
+}

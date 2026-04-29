@@ -1,32 +1,60 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { posterUrl, fetchApi, trailerKey } from "../../../../api/apiConfig";
 import "./SeriesDetails.css";
 import SeasonInfo from "./SeasonInfo";
 import ReactLoading from "react-loading";
+
 const MovieDetail = ({ props }) => {
   const [imageKey, setImageKey] = useState(Date.now());
   const [showPlay, setShowPlay] = useState(false);
-
   const [showSeason, setShowSeason] = useState(false);
   const [trailer, setTrailer] = useState();
+  
+  // Ref to track iframe for proper cleanup
+  const iframeRef = useRef(null);
+  
   const updateShow = () => setShowSeason((prev) => !prev);
   const closeSeason = () => setShowSeason(false);
 
   function getTrailer() {
     const url = `/tv/${props.id}/videos?language=en-US`;
     fetchApi(url).then((res) => {
-      // console.log("Trailer",res );
       setTrailer(trailerKey(res));
     });
   }
 
+  // Cleanup function to stop YouTube player
+  const stopYouTubePlayer = () => {
+    if (iframeRef.current) {
+      // Reset iframe src to stop the video
+      const currentSrc = iframeRef.current.src;
+      iframeRef.current.src = '';
+      // Small delay to ensure the video stops, then restore src for future use
+      setTimeout(() => {
+        if (iframeRef.current) {
+          iframeRef.current.src = currentSrc;
+        }
+      }, 100);
+    }
+  };
+
   const hideTrailerPlay = () => {
+    stopYouTubePlayer(); // Stop the video before hiding
     setShowPlay(false);
     setTrailer(null);
   };
+  
   const showTrailerPlay = () => {
     setShowPlay(true);
   };
+  
+  // Cleanup on component unmount
+  useEffect(() => {
+    return () => {
+      stopYouTubePlayer();
+    };
+  }, []);
+  
   getTrailer();
   useEffect(() => {
     setImageKey(Date.now());
@@ -109,9 +137,10 @@ const MovieDetail = ({ props }) => {
             "Trailer not found !!"
           ) : (
             <iframe
+              ref={iframeRef}
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/${trailer.key}?rel=0&modestbranding=1`}
+              src={`https://www.youtube.com/embed/${trailer.key}?rel=0&modestbranding=1&enablejsapi=1`}
               title={trailer.name}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
