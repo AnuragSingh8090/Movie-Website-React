@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CategoryRender from "./CategoryRender";
+import NoResults from "../NoResults/NoResults";
 import { baseUrl, genre } from "../../api/apiConfig";
 
 export const Trending = () => {
@@ -112,6 +113,12 @@ export const LatestMovies = () => {
 
 export const SearchResult = (props) => {
   const [page, setPages] = useState(1);
+  
+  // Reset page when search term changes
+  useEffect(() => {
+    setPages(1);
+  }, [props.search]);
+  
   const nextPage = (totalPages) => {
     if (page <= totalPages) {
       setPages(page + 1);
@@ -125,8 +132,25 @@ export const SearchResult = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);
-  const title = "Search Results";
-  const url = `${baseUrl}/search/multi?query=${props.search}&include_adult=false&language=en-US&page=${page}`;
+  
+  const title = props.search ? `Search Results for "${props.search}"` : "Search Results";
+  
+  // Don't make API call if search is empty
+  if (!props.search || props.search.trim() === "") {
+    return (
+      <div className="working_area">
+        <center className="cards-title">Search Results</center>
+        <NoResults 
+          title="Start Your Search"
+          message="Enter a movie or TV show name in the search box above to find what you're looking for."
+          showSuggestions={false}
+          showActions={false}
+        />
+      </div>
+    );
+  }
+  
+  const url = `${baseUrl}/search/multi?query=${encodeURIComponent(props.search.trim())}&include_adult=false&language=en-US&page=${page}`;
   return (
     <CategoryRender
       title={title}

@@ -3,7 +3,10 @@ import "./Card.css";
 import NoImage from "./no-photo-card.jpg";
 
 function Card(props) {
-  var type = props.type === "Movie" ? "M" : "S";
+  // Determine the route prefix based on content type
+  const routePrefix = props.type === "Movie" ? "/movie" : "/series";
+  const movieId = props.link.replace("/", ""); // Remove the leading slash
+  const type = props.type === "Movie" ? "M" : "S";
 
   return (
     <div className="movie_card">
@@ -23,7 +26,7 @@ function Card(props) {
         </div>
         <div className="movie_language">{props.language}</div>
 
-        <Link to={`${props.link}+${type}`}>
+        <Link to={`${routePrefix}/${movieId}+${type}`}>
           <button type="submit" className="downloadBtn">
             Watch Now
           </button>

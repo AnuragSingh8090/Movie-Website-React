@@ -11,8 +11,24 @@ function Recomendation_area() {
   const page = 1;
   const baseUrl = "https://api.themoviedb.org/3";
   const rawData = useParams();
-  const Id = rawData.movie.match(/\d+/)[0];
-  let type = rawData.movie.match(/[A-Za-z]+/);
+  
+  // Handle both movieId and seriesId parameters from new routing structure
+  const movieParam = rawData.movieId || rawData.seriesId;
+  
+  // Check if we have a parameter
+  if (!movieParam) {
+    console.error("No movie parameter found in Recomendation_area");
+    return <div>Error: Unable to load recommendations</div>;
+  }
+  
+  const Id = movieParam.match(/\d+/)[0];
+  let type = movieParam.match(/[A-Za-z]+/);
+  
+  // Check if we successfully extracted the type
+  if (!type || !type[0]) {
+    console.error("Unable to extract movie type from parameter:", movieParam);
+    return <div>Error: Unable to determine content type</div>;
+  }
 
   const similarMovie = {
     title: "Similar Movies",

@@ -1,0 +1,139 @@
+.skeleton-card {
+  /* Exact same dimensions as movie_card */
+  width: 180px;
+  height: 256px;
+  border-radius: 13px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  
+  /* Use website's theme colors */
+  background: var(--container_color_dark);
+  box-shadow: var(--card_shadow_dark);
+  
+  /* Remove any margin - parent gap handles spacing */
+  margin: 0;
+}
+
+.skeleton-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  border-radius: 8px;
+  position: relative;
+}
+
+.skeleton-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 6px 5px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4));
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+
+.skeleton-title {
+  width: 80%;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.skeleton-year {
+  width: 50%;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.skeleton-type {
+  width: 60%;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.skeleton-language {
+  width: 40%;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.skeleton-button {
+  width: 70%;
+  height: 24px;
+  background: rgba(31, 155, 204, 0.3);
+  border-radius: 16px;
+  margin-top: 3px;
+}
+
+/* Exact same responsive breakpoints as movie_card */
+@media screen and (max-width: 800px) {
+  .skeleton-card {
+    width: 173px;
+    height: 247px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .skeleton-card {
+    width: 158px;
+    height: 232px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .skeleton-card {
+    width: 36vw;
+    height: 54vw;
+  }
+  
+  .skeleton-title {
+    height: 13px;
+  }
+  
+  .skeleton-year,
+  .skeleton-type,
+  .skeleton-language {
+    height: 12px;
+  }
+  
+  .skeleton-button {
+    height: 20px;
+    font-size: 11px;
+  }
+}

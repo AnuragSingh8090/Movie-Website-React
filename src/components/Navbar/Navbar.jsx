@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useDebounce } from "../../hooks/useDebounce";
 import "./Navbar.css";
 
 function Navbar(props) {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   const [input, setInput] = useState("");
   const navigate = useNavigate();
+  
+  // Debounce search input with 500ms delay
+  const debouncedSearchTerm = useDebounce(input, 500);
+
+  // Effect for debounced search
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      props.check(debouncedSearchTerm);
+    } else {
+      // Clear search when input is empty
+      props.check("");
+    }
+  }, [debouncedSearchTerm, props]);
 
   const toggleNavbarVisibility = () => {
     setIsNavbarVisible(true);
@@ -18,18 +32,24 @@ function Navbar(props) {
   const updateInput = (event) => {
     const value = event.target.value;
     setInput(value);
-    props.check(value);
+    // Remove immediate props.check call - now handled by debounced effect
   };
 
   const getInput = () => {
-    const value = input;
-    props.check(value);
+    const value = input.trim();
+    if (value) {
+      props.check(value);
+      navigate("/search");
+    }
   };
 
   const runSearch = (event) => {
     if (event.key === "Enter") {
-      getInput();
-      navigate("/search");
+      const value = input.trim();
+      if (value) {
+        props.check(value);
+        navigate("/search");
+      }
     }
   };
 
