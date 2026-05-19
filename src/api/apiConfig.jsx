@@ -1,13 +1,14 @@
 export const API_KEY = "d7842d4e2f0bce6affa5474474495a03";
 export const baseUrl = "https://api.themoviedb.org/3";
 export const posterUrl = "https://image.tmdb.org/t/p/original";
+const token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNzg0MmQ0ZTJmMGJjZTZhZmZhNTQ3NDQ3NDQ5NWEwMyIsIm5iZiI6MTcxOTkyMjAwNi4zNzMsInN1YiI6IjY2ODNlZDU2OWM5OGIzNGY5NjliMjVlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FbzFI3W5Av9WBi-ivjBxgATVe4wzfkPhzmlDw3LkBEI'
 let page = 1;
 export const options = {
   method: "GET",
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNzg0MmQ0ZTJmMGJjZTZhZmZhNTQ3NDQ3NDQ5NWEwMyIsIm5iZiI6MTcyMTc2MTIwNS4wODg2MTEsInN1YiI6IjY2ODNlZDU2OWM5OGIzNGY5NjliMjVlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xQMsRmKfUZqbbAZ9DcAj-BiPgWfbDUaQWyBrVCiIyS4",
+      `Bearer ${token}`,
   },
 };
 
