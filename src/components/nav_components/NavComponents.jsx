@@ -19,7 +19,7 @@ export const Trending = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Trending";
-  const url = `${baseUrl}/trending/all/day?language=en-US&page=${page}&sort_by=popularity.desc`;
+  const url = `${baseUrl}/trending/all/day?language=en-US`;
   return (
     <CategoryRender
       title={title}
@@ -46,7 +46,7 @@ export const Movies = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Movies";
-  const url = `${baseUrl}/discover/movie?include_adult=true&include_video=true&language=en-US&page=${page}&sort_by=popularity.desc`;
+  const url = `${baseUrl}/discover/movie?include_adult=true&include_video=true&language=en-US&sort_by=popularity.desc`;
   return (
     <CategoryRender
       title={title}
@@ -73,7 +73,7 @@ export const TvShows = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Series";
-  const url = `${baseUrl}/discover/tv?include_adult=true&include_null_first_air_dates=true&language=en-US&page=${page}&sort_by=popularity.desc`;
+  const url = `${baseUrl}/discover/tv?include_adult=true&include_null_first_air_dates=true&language=en-US&sort_by=popularity.desc`;
   return (
     <CategoryRender
       title={title}
@@ -100,7 +100,7 @@ export const LatestMovies = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Latest Movies";
-  const url = `${baseUrl}/movie/now_playing?language=en-US&page=${page}`;
+  const url = `${baseUrl}/movie/now_playing?language=en-US`;
   return (
     <CategoryRender
       title={title}
@@ -150,7 +150,7 @@ export const SearchResult = (props) => {
     );
   }
   
-  const url = `${baseUrl}/search/multi?query=${encodeURIComponent(props.search.trim())}&include_adult=false&language=en-US&page=${page}`;
+  const url = `${baseUrl}/search/multi?query=${encodeURIComponent(props.search.trim())}&include_adult=false&language=en-US`;
   return (
     <CategoryRender
       title={title}
@@ -177,7 +177,7 @@ export const Horror = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Horror Movies";
-  const url = `${baseUrl}/discover/movie?with_genres=${genre.Horror}&page=${page}`;
+  const url = `${baseUrl}/discover/movie?with_genres=${genre.Horror}`;
   return (
     <CategoryRender
       title={title}
@@ -204,7 +204,7 @@ export const ScienceFiction = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Science Fiction Movies";
-  const url = `${baseUrl}/discover/movie?with_genres=${genre.ScienceFiction}&page=${page}`;
+  const url = `${baseUrl}/discover/movie?with_genres=${genre.ScienceFiction}`;
   return (
     <CategoryRender
       title={title}
@@ -231,7 +231,7 @@ export const Thriller = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Thriller Movies";
-  const url = `${baseUrl}/discover/movie?with_genres=${genre.Thriller}&page=${page}`;
+  const url = `${baseUrl}/discover/movie?with_genres=${genre.Thriller}`;
   return (
     <CategoryRender
       title={title}
@@ -258,7 +258,7 @@ export const Romance = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Romantic Movies";
-  const url = `${baseUrl}/discover/movie?with_genres=${genre.Romance}&page=${page}`;
+  const url = `${baseUrl}/discover/movie?with_genres=${genre.Romance}`;
   return (
     <CategoryRender
       title={title}
@@ -285,7 +285,7 @@ export const Crime = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Crime Movies";
-  const url = `${baseUrl}/discover/movie?with_genres=${genre.Crime}&page=${page}`;
+  const url = `${baseUrl}/discover/movie?with_genres=${genre.Crime}`;
   return (
     <CategoryRender
       title={title}
@@ -312,7 +312,7 @@ export const Animation = () => {
     window.scrollTo(0, 0);
   }, [page]);
   const title = "Animation Movies";
-  const url = `${baseUrl}/discover/movie?with_genres=${genre.Animation}&page=${page}`;
+  const url = `${baseUrl}/discover/movie?with_genres=${genre.Animation}`;
   return (
     <CategoryRender
       title={title}

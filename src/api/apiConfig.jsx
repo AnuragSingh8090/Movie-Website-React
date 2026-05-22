@@ -2,7 +2,6 @@ export const API_KEY = "d7842d4e2f0bce6affa5474474495a03";
 export const baseUrl = "https://api.themoviedb.org/3";
 export const posterUrl = "https://image.tmdb.org/t/p/original";
 const token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNzg0MmQ0ZTJmMGJjZTZhZmZhNTQ3NDQ3NDQ5NWEwMyIsIm5iZiI6MTcxOTkyMjAwNi4zNzMsInN1YiI6IjY2ODNlZDU2OWM5OGIzNGY5NjliMjVlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FbzFI3W5Av9WBi-ivjBxgATVe4wzfkPhzmlDw3LkBEI'
-let page = 1;
 export const options = {
   method: "GET",
   headers: {
@@ -25,29 +24,29 @@ export const fetchApi = async (prop) => {
 
 export const popularMovie = {
   title: "Popular Movies",
-  url: `${baseUrl}/movie/popular?language=en-US&page=${page}`,
+  url: `${baseUrl}/movie/popular?language=en-US`,
 };
 export const popularSeries = {
   title: "Popular Series",
-  url: `${baseUrl}/tv/popular?language=en-US&page=${page}`,
+  url: `${baseUrl}/tv/popular?language=en-US`,
 };
 export const topRatedMovie = {
   title: "Top Rated Movies",
-  url: `${baseUrl}/movie/top_rated?language=en-US&page=${page}`,
+  url: `${baseUrl}/movie/top_rated?language=en-US`,
 };
 export const topRatedSeries = {
   title: "Top Rated Series",
-  url: `${baseUrl}/tv/top_rated?language=en-US&page=${page}`,
+  url: `${baseUrl}/tv/top_rated?language=en-US`,
 };
 
 export const onTheAirSeries = {
   title: "On The Air Series",
-  url: `${baseUrl}/tv/on_the_air?language=en-US&page=${page}`,
+  url: `${baseUrl}/tv/on_the_air?language=en-US`,
 };
 
 export const upcommingMovie = {
   title: "Upcomming Movie",
-  url: `${baseUrl}/movie/upcoming?language=en-US&page=${page}`,
+  url: `${baseUrl}/movie/upcoming?language=en-US`,
 };
 
 export const genre = {

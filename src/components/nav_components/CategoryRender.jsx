@@ -55,18 +55,14 @@ function CategoryRender(props) {
   };
 
   useEffect(() => {
-    // Reset page to 1 when URL changes (new search/category)
-    if (page !== 1) {
-      setPage(1);
-    } else {
-      getMovieData(1);
-    }
+    // Reset page to 1 and set initialLoad when URL changes (new search/category)
+    setPage(1);
+    setInitialLoad(true);
   }, [props.url]);
 
   useEffect(() => {
-    if (page !== 1) {
-      getMovieData(page);
-    }
+    // Fetch data whenever page changes
+    getMovieData(page);
   }, [page]);
 
   const handlePageChange = (event, value) => {
